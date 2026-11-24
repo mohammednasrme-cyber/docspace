@@ -1,0 +1,65 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+enum Permission {
+  VIEWER
+  EDITOR
+}
+
+model User {
+  id            String         @id @default(uuid()) @db.Uuid
+  name          String         @db.VarChar(80)
+  email         String         @unique @db.VarChar(254)
+  password      String
+  createdAt     DateTime       @default(now())
+  updatedAt     DateTime       @updatedAt
+  documents     Document[]     @relation("DocumentOwner")
+  sharedWithMe  DocumentShare[]
+  refreshTokens RefreshToken[]
+}
+
+model Document {
+  id        String          @id @default(uuid()) @db.Uuid
+  title     String          @db.VarChar(200)
+  content   Json
+  ownerId   String          @db.Uuid
+  createdAt DateTime        @default(now())
+  updatedAt DateTime        @updatedAt
+  owner     User            @relation("DocumentOwner", fields: [ownerId], references: [id], onDelete: Cascade)
+  shares    DocumentShare[]
+
+  @@index([ownerId, updatedAt])
+}
+
+model DocumentShare {
+  id         String     @id @default(uuid()) @db.Uuid
+  documentId String     @db.Uuid
+  userId     String     @db.Uuid
+  permission Permission @default(VIEWER)
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  document   Document   @relation(fields: [documentId], references: [id], onDelete: Cascade)
+  user       User       @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([documentId, userId])
+  @@index([userId])
+  @@index([documentId])
+}
+
+model RefreshToken {
+  id        String   @id @default(uuid()) @db.Uuid
+  tokenHash String   @unique @db.VarChar(64)
+  userId    String   @db.Uuid
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}

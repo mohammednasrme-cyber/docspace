@@ -1,0 +1,226 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: 40 20% 98%;
+    --foreground: 222 47% 11%;
+    --card: 0 0% 100%;
+    --card-foreground: 222 47% 11%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 47% 11%;
+    --primary: 222 47% 11%;
+    --primary-foreground: 210 40% 98%;
+    --secondary: 210 40% 96%;
+    --secondary-foreground: 222 47% 11%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 214 95% 96%;
+    --accent-foreground: 222 47% 11%;
+    --destructive: 0 72% 51%;
+    --destructive-foreground: 210 40% 98%;
+    --border: 220 14% 91%;
+    --input: 220 14% 89%;
+    --ring: 221 83% 53%;
+    --radius: 0.75rem;
+  }
+
+  * {
+    @apply border-border;
+  }
+
+  html {
+    -webkit-text-size-adjust: 100%;
+  }
+
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: 'cv02', 'cv03', 'cv04', 'cv11';
+  }
+
+  ::selection {
+    background: rgba(59, 108, 246, 0.18);
+  }
+
+  button,
+  input,
+  textarea {
+    font: inherit;
+  }
+}
+
+@layer utilities {
+  .scrollbar-subtle {
+    scrollbar-width: thin;
+    scrollbar-color: hsl(220 14% 84%) transparent;
+  }
+
+  .scrollbar-subtle::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  .scrollbar-subtle::-webkit-scrollbar-thumb {
+    border-radius: 9999px;
+    background: hsl(220 14% 85%);
+  }
+}
+
+.docspace-editor .ProseMirror {
+  min-height: 58vh;
+  outline: none;
+  color: #1e293b;
+  font-size: 16px;
+  line-height: 1.8;
+  letter-spacing: -0.003em;
+}
+
+.docspace-editor .ProseMirror > * + * {
+  margin-top: 0.85em;
+}
+
+.docspace-editor .ProseMirror p {
+  margin: 0;
+}
+
+.docspace-editor .ProseMirror h1 {
+  font-size: 2.1rem;
+  line-height: 1.2;
+  letter-spacing: -0.035em;
+  font-weight: 700;
+  margin-top: 1.4em;
+  margin-bottom: 0.45em;
+  color: #0f172a;
+}
+
+.docspace-editor .ProseMirror h2 {
+  font-size: 1.5rem;
+  line-height: 1.3;
+  letter-spacing: -0.025em;
+  font-weight: 650;
+  margin-top: 1.35em;
+  margin-bottom: 0.4em;
+  color: #0f172a;
+}
+
+.docspace-editor .ProseMirror h3 {
+  font-size: 1.2rem;
+  line-height: 1.4;
+  font-weight: 650;
+  margin-top: 1.2em;
+  color: #0f172a;
+}
+
+.docspace-editor .ProseMirror > :first-child {
+  margin-top: 0;
+}
+
+.docspace-editor .ProseMirror ul,
+.docspace-editor .ProseMirror ol {
+  padding-left: 1.5rem;
+  margin: 0.7em 0;
+}
+
+.docspace-editor .ProseMirror ul {
+  list-style: disc;
+}
+
+.docspace-editor .ProseMirror ol {
+  list-style: decimal;
+}
+
+.docspace-editor .ProseMirror li {
+  margin: 0.25em 0;
+  padding-left: 0.2em;
+}
+
+.docspace-editor .ProseMirror li p {
+  margin: 0;
+}
+
+.docspace-editor .ProseMirror blockquote {
+  border-left: 3px solid #cbd5e1;
+  margin: 1em 0;
+  padding: 0.2em 0 0.2em 1.15em;
+  color: #475569;
+}
+
+.docspace-editor .ProseMirror code {
+  background: #f1f5f9;
+  border-radius: 0.3rem;
+  padding: 0.15em 0.35em;
+  font-size: 0.88em;
+  font-family: var(--font-geist-mono), ui-monospace, monospace;
+  color: #0f172a;
+}
+
+.docspace-editor .ProseMirror pre {
+  background: #0f172a;
+  color: #e2e8f0;
+  border-radius: 0.65rem;
+  padding: 1rem 1.15rem;
+  overflow-x: auto;
+  font-size: 0.875rem;
+  line-height: 1.65;
+  margin: 1.1em 0;
+}
+
+.docspace-editor .ProseMirror pre code {
+  background: transparent;
+  color: inherit;
+  padding: 0;
+  font-size: inherit;
+}
+
+.docspace-editor .ProseMirror hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  margin: 2em 0;
+}
+
+.docspace-editor .ProseMirror p.is-editor-empty:first-child::before {
+  content: attr(data-placeholder);
+  color: #94a3b8;
+  pointer-events: none;
+  float: left;
+  height: 0;
+}
+
+.docspace-editor .ProseMirror:focus {
+  outline: none;
+}
+
+.docspace-editor.is-readonly .ProseMirror {
+  caret-color: transparent;
+  cursor: default;
+}
+
+.docspace-editor .ProseMirror .is-empty::before {
+  color: #94a3b8;
+}
+
+.skeleton-shimmer {
+  position: relative;
+  overflow: hidden;
+}
+
+.skeleton-shimmer::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background-image: linear-gradient(
+    90deg,
+    rgba(255, 255, 255, 0) 0,
+    rgba(255, 255, 255, 0.65) 50%,
+    rgba(255, 255, 255, 0) 100%
+  );
+  animation: shimmer 1.6s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
