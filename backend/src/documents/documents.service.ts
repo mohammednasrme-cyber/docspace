@@ -134,12 +134,15 @@ export class DocumentsService {
       },
     });
 
-    return this.toDetail({
-      document: updated,
-      role: access.role,
-      permission: access.permission,
-      shareId: access.shareId,
-    });
+    return {
+      id: updated.id,
+      title: updated.title,
+      content: updated.content,
+      owner: updated.owner,
+      createdAt: updated.createdAt,
+      updatedAt: updated.updatedAt,
+      access: this.accessSummary(access.role, access.permission),
+    };
   }
 
   async remove(documentId: string, userId: string) {

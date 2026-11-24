@@ -25,6 +25,12 @@ export interface DocumentAccessResult {
   shareId: string | null;
 }
 
+export interface DocumentEditAccess {
+  role: DocumentRole;
+  permission: Permission | null;
+  shareId: string | null;
+}
+
 @Injectable()
 export class DocumentAccessService {
   constructor(private readonly prisma: PrismaService) {}
@@ -68,14 +74,46 @@ export class DocumentAccessService {
     };
   }
 
-  async assertCanEdit(documentId: string, userId: string): Promise<DocumentAccessResult> {
-    const access = await this.getAccess(documentId, userId);
-    if (access.role === 'VIEWER') {
+  async assertCanEdit(documentId: string, userId: string): Promise<DocumentEditAccess> {
+    const document = await this.prisma.document.findUnique({
+      where: { id: documentId },
+      select: {
+        id: true,
+        ownerId: true,
+        shares: {
+          where: { userId },
+          select: { id: true, permission: true },
+        },
+      },
+    });
+
+    if (!document) {
+      throw new NotFoundException('Document not found');
+    }
+
+    const share = document.shares[0];
+    if (document.ownerId !== userId && !share) {
+      throw new NotFoundException('Document not found');
+    }
+
+    const role: DocumentRole =
+      document.ownerId === userId
+        ? 'OWNER'
+        : share.permission === Permission.EDITOR
+          ? 'EDITOR'
+          : 'VIEWER';
+
+    if (role === 'VIEWER') {
       throw new ForbiddenException(
         'You have view-only access and cannot edit this document',
       );
     }
-    return access;
+
+    return {
+      role,
+      permission: document.ownerId === userId ? null : share.permission,
+      shareId: share?.id ?? null,
+    };
   }
 
   async assertOwner(documentId: string, userId: string): Promise<DocumentAccessResult> {

@@ -1,234 +1,236 @@
-# DocSpace Submission Document
+ DocSpace – Assessment Submission
+1. Project Overview
+DocSpace is a collaborative document management and editing application developed for the AI-Native Full Stack Developer Assessment.
+It allows users to create, edit, format, import, and share documents with other users through a simple interface and role-based access control.
+The application focuses on secure authentication, document management, rich-text editing, and controlled document sharing.
+2. Project Links
+GitHub Repository: https://github.com/mohammednasrme-cyber/docspace
+Live Application: https://docspace-orpin.vercel.app
+3. Demo Credentials
+The following accounts are intended for testing the document sharing workflow. Make sure both accounts have been seeded in the production database before submission.
+User
+Email
+Password
+Purpose
+Mohamed
+mohamed@example.com
+Demo123!
+Document Owner
+Ahmed
+ahmed@example.com
+Demo123!
+Shared User
 
-## Project Overview
-**DocSpace** is a collaborative document editor built for the AI-Native Full Stack Developer assessment. It provides a clean, focused workspace for creating, formatting, importing, and sharing documents with clear permission controls.
+Suggested sharing workflow:
+Log in using Mohamed's account.
+Create a document and open its sharing settings.
+Share the document with Ahmed as a VIEWER.
+Log in using Ahmed's account and verify read-only access.
+Change Ahmed's permission to EDITOR and verify that editing is allowed.
+4. Implemented Features
+4.1 Authentication and Authorization
+User registration with input validation.
+Login and logout functionality.
+JWT-based authentication.
+Access token refresh mechanism.
+Current-user endpoint.
+Protected API endpoints.
+4.2 Document Management
+Create new documents.
+Retrieve owned documents.
+Retrieve individual documents.
+Update document titles and content.
+Delete documents.
+Access documents shared by other users.
+4.3 Rich Text Editor
+Tiptap rich-text editor integration.
+Bold, italic, and underline formatting.
+Heading levels (H1–H3).
+Bulleted and numbered lists.
+Text alignment.
+Placeholder support.
+4.4 Auto-save
+Debounced auto-save with a 1.5-second delay.
+Save status indicators.
+Pending-save detection.
+Controlled save operations to reduce unnecessary API requests.
+4.5 Document Sharing
+Share documents with other registered users.
+VIEWER permission for read-only access.
+EDITOR permission for editing access.
+View active sharing permissions.
+Update existing permissions.
+Revoke document access.
+Backend authorization checks to enforce permissions.
+4.6 File Import
+Import plain-text (.txt) files.
+Import Markdown (.md) files.
+Preserve paragraphs and supported formatting.
+Server-side file validation.
+5. Technical Implementation
+Backend
+NestJS and TypeScript.
+Prisma ORM.
+PostgreSQL database.
+JWT authentication.
+Global exception handling.
+Request validation.
+Consistent API response handling.
+Environment-based configuration.
+Frontend
+Next.js App Router.
+TypeScript.
+Tailwind CSS.
+shadcn/ui components.
+TanStack React Query.
+React Hook Form.
+Zod validation.
+Tiptap editor.
+Security
+Password hashing.
+JWT-based authentication using HttpOnly cookies.
+Backend route protection.
+Role-based document authorization.
+Input validation.
+CORS configuration.
+Security headers using Helmet.
+6. Testing and Verification
+Backend Tests
+Unit tests for plain-text and Markdown conversion.
+End-to-end tests for document sharing and authorization.
+TypeScript compilation checks.
+Production build verification.
+Latest recorded test results:
+Unit Tests: 4/4 passed.
+Sharing E2E Tests: 1/1 passed.
+Backend TypeScript checks: Passed.
+Backend production build: Passed.
+Frontend Verification
+TypeScript checks: Passed.
+Production build: Passed.
+Manual Testing Scenarios
+The following scenarios should be verified against the deployed application before marking them as completed:
+User registration and login.
+Logout and token refresh.
+Document creation, editing, and deletion.
+Rich-text formatting.
+Auto-save and document persistence.
+TXT and Markdown imports.
+Sharing documents with VIEWER and EDITOR permissions.
+Updating and revoking sharing permissions.
+Permission enforcement for unauthorized users.
+Responsive layout across screen sizes.
+7. Known Limitations and Future Improvements
+Real-time Collaboration
+No live cursor presence.
+No simultaneous editing synchronization.
+No real-time conflict resolution.
+Document Management
+Document version history.
+PDF and DOCX export.
+Image uploads and embedding.
+Document templates.
+Folder-based organization.
+Advanced document search.
+User Experience
+Improved mobile toolbar interactions.
+Additional keyboard shortcuts.
+Dark mode.
+More descriptive validation and error messages.
+Infrastructure
+Rate limiting.
+Audit logging.
+Performance monitoring.
+Automated database backups.
+Offline editing support.
+Current Technical Limitations
+Complex nested Markdown lists may not preserve their complete structure during import.
+Document changes are not synchronized between users in real time.
+Import file-size restrictions could be improved.
+Saving documents requires an active internet connection.
+8. Deployment Information
+Frontend
+Hosting Platform: Vercel.
+Live URL: https://docspace-orpin.vercel.app
+Database
+Provider: Supabase.
+Database: PostgreSQL.
+ORM: Prisma.
+Database migration successfully applied using npx prisma migrate deploy.
+Backend
+Framework: NestJS.
+Production environment variables and database connectivity must be configured for the deployed API.
+Note: The frontend and database deployment status does not by itself confirm that every production workflow is operational. Authentication, document operations, and sharing should be verified against the live environment.
+9. Local Setup Instructions
+Prerequisites
+Node.js and npm.
+Docker and Docker Compose.
+Git.
+Clone the Repository
+git clone https://github.com/mohammednasrme-cyber/docspace.git
+cd docspace
+Start the Database
+docker compose up -d
+Backend Setup
+cd backend
+npm install
+Create a .env file based on .env.example and configure the database connection and required secrets.
+Then run:
+npx prisma generate
+npx prisma migrate dev
+npm run seed
+npm run start:dev
+The backend API should be available at:
+http://localhost:3001/api
+Frontend Setup
+Open another terminal:
+cd frontend
+npm install
+Create .env.local based on .env.local.example and configure the backend API URL.
+Then run:
+npm run dev
+The frontend should be available at:
+http://localhost:3000
+Environment Variables
+Refer to the .env.example and .env.local.example files for the required configuration.
+Never commit actual environment secrets or database passwords to the repository.
+10. AI-Assisted Development
+AI tools were used throughout the development process to support implementation, debugging, and problem-solving.
+The development workflow included:
+Using AI to explore implementation approaches and generate initial code.
+Reviewing generated code before integrating it into the project.
+Evaluating suggested solutions for security, maintainability, and performance.
+Modifying or rejecting generated implementations when a better technical approach was identified.
+Verifying the final implementation through tests, TypeScript checks, and production builds.
+For specific examples of AI-generated code that was reviewed, modified, or rejected, see AI_WORKFLOW.md.
+11. Project Deliverables
+The assessment submission includes:
+Complete frontend and backend source code.
+Public GitHub repository.
+README with setup instructions.
+Architecture documentation.
+AI workflow documentation.
+Database schema and migration files.
+Docker Compose configuration.
+Environment variable examples.
+Testing information.
+Walkthrough video, if available.
+12. Walkthrough Video
+Video URL: [https://drive.google.com/file/d/1jcQbE9WUIewJOeLpr2Ph2z5JAPQDEOD3/view?usp=drive_link]
+The walkthrough should demonstrate:
+Application overview.
+Authentication.
+Document creation and editing.
+Rich-text formatting.
+Auto-save behavior.
+Document sharing.
+VIEWER and EDITOR permission differences.
+13. Submission Information
+Project: DocSpace
+Assessment: AI-Native Full Stack Developer
+Submission Date: November 24, 2026
+Source Code: https://github.com/mohammednasrme-cyber/docspace
+Live Application: https://docspace-orpin.vercel.app
 
-## 📍 Repository URLs
-- **GitHub Repository**: `https://github.com/mohammednasrme-cyber/docspace` 
-- **live deployment**: `https://docspace-orpin.vercel.app`
+DocSpace was developed as part of the AI-Native Full Stack Developer Assessment, demonstrating full-stack development, secure application design, AI-assisted engineering, and practical problem-solving.
 
-
-## 👤 Demo Credentials
-Two pre-seeded accounts for testing:
-
-| Account | Email | Password | Role |
-|---------|-------|----------|------|
-| Mohamed | `mohamed@example.com` | `Demo123!` | Document Owner |
-| Ahmed | `ahmed@example.com` | `Demo123!` | Shared User |
-
-## ✅ Completed Features
-
-### Core Functionality
-- [x] **User Authentication**
-  - Registration with validation
-  - Login with JWT tokens
-  - Secure logout
-  - Token refresh mechanism
-  - Current user endpoint
-
-- [x] **Document Management**
-  - Create new documents
-  - List owned documents
-  - Get document by ID
-  - Update document content and title
-  - Delete documents
-  - List shared documents
-
-- [x] **Rich Text Editor**
-  - Tiptap editor integration
-  - Formatting toolbar (bold, italic, underline)
-  - Headings (H1-H3)
-  - Bulleted and numbered lists
-  - Text alignment
-  - Placeholder support
-
-- [x] **Auto-save System**
-  - Debounced saving (1.5s delay)
-  - Pending save detection
-  - Visual save status indicators
-  - Prevents data loss on navigation
-
-- [x] **Document Sharing**
-  - Share documents with other users
-  - VIEWER permission (read-only)
-  - EDITOR permission (read + write)
-  - List active shares
-  - Update share permissions
-  - Remove sharing access
-
-- [x] **File Import**
-  - TXT file import (preserves paragraphs)
-  - Markdown file import (converts formatting)
-  - Server-side validation
-  - Format preservation
-
-### Technical Implementation
-- [x] **Backend (NestJS)**
-  - TypeScript with strict mode
-  - Prisma ORM with PostgreSQL
-  - Global exception filter
-  - Validation pipes
-  - Response transformation
-  - Comprehensive error handling
-
-- [x] **Frontend (Next.js 15)**
-  - App Router architecture
-  - TypeScript with strict mode
-  - Tailwind CSS + shadcn/ui
-  - TanStack React Query
-  - React Hook Form + Zod validation
-  - Responsive design
-
-- [x] **Security Features**
-  - JWT authentication with HttpOnly cookies
-  - BCrypt password hashing
-  - Input validation at multiple layers
-  - CORS configuration
-  - Helmet security headers
-
-- [x] **Testing**
-  - Backend unit tests (file conversion)
-  - Backend E2E tests (sharing authorization)
-  - TypeScript compilation checks
-  - Production build verification
-
-- [x] **Documentation**
-  - README.md with setup instructions
-  - ARCHITECTURE.md with system design
-  - AI_WORKFLOW.md with development process
-  - This submission document
-
-## ⚠️ Incomplete Features (Future Improvements)
-
-### Planned Enhancements
-- [ ] **Real-time Collaboration**
-  - Live cursor presence
-  - Simultaneous editing
-  - Conflict resolution
-
-- [ ] **Advanced Features**
-  - Document version history
-  - File export (PDF, DOCX)
-  - Image upload and embedding
-  - Document templates
-
-- [ ] **User Experience**
-  - Document search functionality
-  - Folder/organization system
-  - Keyboard shortcuts
-  - Dark mode theme
-
-- [ ] **Infrastructure**
-  - Rate limiting
-  - Audit logging
-  - Performance monitoring
-  - Automated backups
-
-## 🐛 Known Issues
-
-### Minor Issues
-1. **Markdown Import**: Some complex nested lists may not convert perfectly
-2. **Mobile UI**: Toolbar could be more touch-friendly on small screens
-3. **Error Messages**: Some validation errors could be more user-friendly
-
-### Technical Limitations
-1. **No Real-time Updates**: Document changes aren't synced between users in real-time
-2. **File Size Limits**: No explicit file size validation for imports
-3. **No Offline Support**: Requires internet connection to save changes
-
-## 🧪 Testing Results
-
-### Backend Tests
-```bash
-✅ Unit Tests: 4/4 passed
-✅ E2E Tests: 1/1 passed
-✅ TypeScript: No errors
-✅ Production Build: Successful
-```
-
-### Frontend Tests
-```bash
-✅ TypeScript: No errors
-✅ Production Build: Successful
-```
-
-### Manual Testing
-- [x] Authentication flow (login, logout, refresh)
-- [x] Document CRUD operations
-- [x] Editor formatting and auto-save
-- [x] File import (TXT and Markdown)
-- [x] Sharing workflow (VIEWER/EDITOR permissions)
-- [x] Permission enforcement
-- [x] Responsive design
-
-## 🚀 Deployment Status
-
-### Ready for Deployment
-- [x] **Frontend (Vercel)**
-  - Next.js configuration complete
-  - Environment variables documented
-  - Build script verified
-
-- [x] **Backend (Railway)**
-  - NestJS production configuration
-  - Prisma migration scripts
-  - Environment variables documented
-
-- [x] **Database (Supabase/PostgreSQL)**
-  - Schema migrations ready
-  - Seed data script available
-  - Connection pooling configured
-
-### Deployment Steps Required
-1. **Create GitHub repository** and push code
-2. **Deploy backend to Railway** with PostgreSQL database
-3. **Deploy frontend to Vercel** with backend URL configured
-4. **Run database migrations** on production database
-5. **Seed demo users** if desired
-6. **Update URLs** in this document
-
-## 📦 Deliverables Checklist
-
-### Code
-- [x] Complete source code
-- [x] Working local development setup
-- [x] Docker Compose for local database
-- [x] Environment configuration examples
-
-### Documentation
-- [x] README.md with setup instructions
-- [x] ARCHITECTURE.md with system design
-- [x] AI_WORKFLOW.md with development process
-- [x] SUBMISSION.md (this document)
-
-### Testing
-- [x] Backend unit and E2E tests
-- [x] TypeScript compilation checks
-- [x] Production build verification
-- [x] Manual testing scenarios documented
-
-### Deployment Preparation
-- [x] Production environment configuration
-- [x] Database migration scripts
-- [x] Build and start scripts
-- [x] Security best practices implemented
-
-## 🎥 Video Walkthrough
-- **Walkthrough Video**: `https://example.com/walkthrough.mp4` *(To be recorded and uploaded)*
-- **Walkthrough Script**: Available in `WALKTHROUGH_URL.txt`
-
-## 🔗 Links
-- **Live Application**: *(Update after deployment)*
-- **Source Code**: *(Update after GitHub creation)*
-- **API Documentation**: See README.md for endpoint details
-- **Demo Credentials**: Provided above
-
-## 📞 Contact Information
-- **Developer**: [Your Name]
-- **Email**: [Your Email]
-- **GitHub**: [Your GitHub Profile]
-- **Submission Date**: November 24, 2026
-
----
-
-*This project was built as part of the AI-Native Full Stack Developer assessment, demonstrating modern full-stack development practices with AI-assisted development workflows.*

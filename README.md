@@ -1,265 +1,408 @@
-# DocSpace - Collaborative Document Editor
+# DocSpace – Collaborative Document Editor
 
-A modern, AI-native collaborative document editor built for the AI-Native Full Stack Developer assessment. Features include rich-text editing, real-time autosave, document sharing with permissions, and file import functionality.
+DocSpace is a full-stack document management and editing application developed for the AI-Native Full Stack Developer Assessment.
 
-## 🚀 Features
+It provides users with a simple workspace to create, edit, format, import, and share documents with other users through role-based permissions.
 
-- **User Authentication**: Secure JWT-based authentication with HttpOnly cookies
-- **Rich Text Editor**: Tiptap editor with formatting, headings, lists, and more
-- **Document Management**: Create, rename, delete, and organize documents
-- **Sharing System**: Share documents with VIEWER or EDITOR permissions
-- **File Import**: Import TXT and Markdown files with format preservation
-- **Auto-save**: Debounced auto-save with pending save detection
-- **Responsive Design**: Mobile-friendly interface
+The application focuses on secure authentication, document management, rich-text editing, automatic saving, and controlled document sharing.
+
+## 🚀 Live Demo & Repository
+
+- **Live Application:** https://docspace-orpin.vercel.app
+- **GitHub Repository:** https://github.com/mohammednasrme-cyber/docspace
+
+## ✨ Features
+
+### Authentication & Authorization
+- User registration and login.
+- JWT-based authentication using HttpOnly cookies.
+- Secure logout functionality.
+- Access token refresh mechanism.
+- Protected API endpoints.
+
+### Document Management
+- Create new documents.
+- View owned documents.
+- Edit document titles and content.
+- Rename and delete documents.
+- Access documents shared by other users.
+
+### Rich Text Editor
+- Tiptap editor integration.
+- Bold, italic, and underline formatting.
+- Heading levels (H1–H3).
+- Bulleted and numbered lists.
+- Text alignment.
+- Placeholder support.
+
+### Automatic Saving
+- Debounced autosave with a 1.5-second delay.
+- Visual save status indicators.
+- Pending-save detection.
+- Controlled save operations to reduce unnecessary API requests.
+
+### Document Sharing
+- Share documents with other registered users.
+- VIEWER permission for read-only access.
+- EDITOR permission for editing access.
+- View active sharing permissions.
+- Update existing permissions.
+- Revoke document access.
+- Backend authorization to enforce document permissions.
+
+### File Import
+- Import plain-text (.txt) files.
+- Import Markdown (.md) files.
+- Preserve paragraphs and supported formatting.
+- Server-side file validation.
+
+### User Experience
+- Responsive interface.
+- Form validation and error handling.
+- Clean document dashboard.
+- Separate views for owned and shared documents.
 
 ## 🛠 Tech Stack
 
 ### Frontend
-- **Framework**: Next.js 15 (App Router)
-- **Language**: TypeScript
-- **Styling**: Tailwind CSS + shadcn/ui
-- **Editor**: Tiptap
-- **State Management**: TanStack React Query
-- **Forms**: React Hook Form + Zod validation
+- **Framework:** Next.js (App Router)
+- **Language:** TypeScript
+- **Styling:** Tailwind CSS and shadcn/ui
+- **Rich Text Editor:** Tiptap
+- **Server State:** TanStack React Query
+- **Forms:** React Hook Form
+- **Validation:** Zod
 
 ### Backend
-- **Framework**: NestJS
-- **Language**: TypeScript
-- **Database**: PostgreSQL with Prisma ORM
-- **Authentication**: JWT with bcrypt
-- **Validation**: class-validator + class-transformer
+- **Framework:** NestJS
+- **Language:** TypeScript
+- **Database:** PostgreSQL
+- **ORM:** Prisma
+- **Authentication:** JWT and bcrypt
+- **Validation:** class-validator and class-transformer
+- **API Architecture:** RESTful APIs
 
-### Infrastructure
-- **Containerization**: Docker Compose (local development)
-- **API**: RESTful architecture
-- **Security**: Helmet, CORS, secure cookies
+### Infrastructure & Tools
+- **Database Hosting:** Supabase
+- **Frontend Hosting:** Vercel
+- **Local Development:** Docker Compose
+- **Security:** Helmet, CORS, and secure cookies
+- **Version Control:** Git and GitHub
 
 ## 📁 Project Structure
 
-```
-Full-Stack-Developer-Assignment/
-├── backend/                    # NestJS API
-│   ├── prisma/                # Database schema and migrations
-│   ├── src/                   # Source code
-│   │   ├── auth/             # Authentication module
-│   │   ├── documents/        # Document CRUD operations
-│   │   ├── sharing/          # Document sharing functionality
-│   │   ├── uploads/          # File import handling
-│   │   └── ...
-│   └── test/                 # E2E and unit tests
-├── frontend/                  # Next.js application
+```text
+docspace/
+├── backend/
+│   ├── prisma/
+│   │   ├── migrations/
+│   │   └── schema.prisma
 │   ├── src/
-│   │   ├── app/             # App Router pages and layouts
-│   │   ├── features/        # Feature modules
-│   │   │   ├── auth/       # Authentication components
-│   │   │   ├── documents/  # Document management
-│   │   │   ├── editor/     # Tiptap editor components
-│   │   │   └── sharing/    # Sharing UI components
-│   │   └── lib/            # Utilities and API client
-└── docker-compose.yml        # PostgreSQL container
+│   │   ├── auth/
+│   │   ├── documents/
+│   │   ├── sharing/
+│   │   ├── uploads/
+│   │   └── ...
+│   ├── test/
+│   └── package.json
+│
+├── frontend/
+│   ├── src/
+│   │   ├── app/
+│   │   ├── features/
+│   │   │   ├── auth/
+│   │   │   ├── documents/
+│   │   │   ├── editor/
+│   │   │   └── sharing/
+│   │   └── lib/
+│   └── package.json
+│
+├── docker-compose.yml
+└── README.md
 ```
 
-## 🚀 Quick Start
+## ⚡ Quick Start
 
 ### Prerequisites
-- Node.js 18+ and npm
-- Docker & Docker Compose (for local database)
-- PostgreSQL 16+ (for production)
 
-### Local Development
+- Node.js and npm.
+- Docker and Docker Compose.
+- Git.
 
-1. **Clone the repository**
-   ```bash
-   git clone <repository-url>
-   cd Full-Stack-Developer-Assignment
-   ```
+### 1. Clone the Repository
 
-2. **Set up the database**
-   ```bash
-   docker-compose up -d
-   ```
+```bash
+git clone https://github.com/mohammednasrme-cyber/docspace.git
+cd docspace
+```
 
-3. **Configure backend environment**
-   ```bash
-   cd backend
-   cp .env.example .env
-   # Edit .env with your values
-   ```
+### 2. Start the Local Database
 
-4. **Install dependencies and set up database**
-   ```bash
-   cd backend
-   npm install
-   npx prisma generate
-   npx prisma migrate dev
-   npm run seed
-   ```
+```bash
+docker compose up -d
+```
 
-5. **Start the backend server**
-   ```bash
-   npm run start:dev
-   # Backend runs on http://localhost:3001
-   ```
+### 3. Configure the Backend
 
-6. **Configure frontend environment**
-   ```bash
-   cd ../frontend
-   cp .env.local.example .env.local
-   # Edit .env.local if needed
-   ```
+Navigate to the backend directory:
 
-7. **Install frontend dependencies and start**
-   ```bash
-   npm install
-   npm run dev
-   # Frontend runs on http://localhost:3000
-   ```
+```bash
+cd backend
+npm install
+```
 
-### Demo Accounts
-- **Mohamed**: `mohamed@example.com` / `Demo123!`
-- **Ahmed**: `ahmed@example.com` / `Demo123!`
+Create a `.env` file based on `.env.example` and configure the required environment variables, including the database connection string and JWT secrets.
 
-## 📦 Deployment
+### 4. Initialize the Database
 
-### Vercel (Frontend)
-1. Push code to GitHub repository
-2. Import project in Vercel dashboard
-3. Configure environment variables:
-   ```
-   BACKEND_URL=https://your-railway-app.railway.app
-   ```
-4. Deploy
+```bash
+npx prisma generate
+npx prisma migrate dev
+npm run seed
+```
 
-### Railway (Backend)
-1. Create new Railway project
-2. Connect GitHub repository
-3. Add PostgreSQL database service
-4. Set environment variables:
-   ```
-   DATABASE_URL=postgresql://...
-   JWT_ACCESS_SECRET=your-secret-key
-   JWT_REFRESH_SECRET=your-secret-key
-   FRONTEND_URL=https://your-vercel-app.vercel.app
-   COOKIE_SECURE=true
-   NODE_ENV=production
-   ```
-5. Deploy
+The seed script creates demo accounts for testing.
 
-### Supabase (Database Alternative)
-1. Create new Supabase project
-2. Get connection string
-3. Update `DATABASE_URL` in Railway environment
-4. Run migrations:
-   ```bash
-   npx prisma migrate deploy
-   ```
+### 5. Start the Backend Server
 
-## 🔧 Environment Variables
+```bash
+npm run start:dev
+```
 
-### Backend (.env)
+The backend API will be available at:
+
+`http://localhost:3001/api`
+
+### 6. Configure and Start the Frontend
+
+Open a new terminal from the project root:
+
+```bash
+cd frontend
+npm install
+```
+
+Create `.env.local` based on `.env.local.example` and configure the backend API URL.
+
+Start the development server:
+
+```bash
+npm run dev
+```
+
+The frontend will be available at:
+
+`http://localhost:3000`
+
+## 👤 Demo Accounts
+
+The following accounts are created by the database seed script:
+
+| User | Email | Password |
+|---|---|---|
+| Mohamed | mohamed@example.com | Demo123! |
+| Ahmed | ahmed@example.com | Demo123! |
+
+These accounts can be used to test document ownership and sharing permissions, provided the seed script has been executed against the database being used.
+
+## 🔄 Demo Scenario
+
+The following workflow demonstrates the main application features:
+
+1. Log in using Mohamed's account.
+2. Create a new document.
+3. Add content and apply rich-text formatting.
+4. Import a Markdown file.
+5. Verify that changes are automatically saved.
+6. Share the document with Ahmed using VIEWER permission.
+7. Log out and sign in using Ahmed's account.
+8. Verify that Ahmed can view the document but cannot edit it.
+9. Log back in as Mohamed and change Ahmed's permission to EDITOR.
+10. Sign in as Ahmed again and verify that editing is now allowed.
+11. Revoke Ahmed's access and verify that the document is no longer accessible.
+
+## 🔐 Environment Variables
+
+Environment variables are configured separately for the backend and frontend.
+
+### Backend (`backend/.env`)
+
+Refer to `backend/.env.example` for the complete list of required variables.
+
+Typical configuration includes:
+
 ```env
 DATABASE_URL="postgresql://user:password@host:port/database"
 PORT=3001
-NODE_ENV=production
-FRONTEND_URL="https://your-frontend.vercel.app"
-JWT_ACCESS_SECRET="your-long-random-secret"
-JWT_REFRESH_SECRET="your-long-random-secret"
+NODE_ENV=development
+FRONTEND_URL="http://localhost:3000"
+JWT_ACCESS_SECRET="your-access-secret"
+JWT_REFRESH_SECRET="your-refresh-secret"
 ACCESS_TOKEN_TTL="15m"
 REFRESH_TOKEN_TTL_DAYS=7
-COOKIE_SECURE=true
+COOKIE_SECURE=false
 ```
 
-### Frontend (.env.local)
-```env
-BACKEND_URL="https://your-backend.railway.app"
-```
+### Frontend (`frontend/.env.local`)
+
+Refer to `frontend/.env.local.example` for the exact variable names.
+
+Configure the backend API URL according to the frontend API client implementation.
+
+**Important:** Never commit actual database credentials, JWT secrets, or other sensitive environment variables to GitHub.
+
+## 📡 API Documentation
+
+The following endpoints represent the main application API routes.
+
+### Authentication
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/auth/register` | Register a new user |
+| POST | `/api/auth/login` | Authenticate a user |
+| POST | `/api/auth/logout` | Log out the current user |
+| POST | `/api/auth/refresh` | Refresh access token |
+| GET | `/api/auth/me` | Get current user information |
+
+### Documents
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/documents` | List owned documents |
+| POST | `/api/documents` | Create a document |
+| GET | `/api/documents/:id` | Get document details |
+| PATCH | `/api/documents/:id` | Update document |
+| DELETE | `/api/documents/:id` | Delete a document |
+| GET | `/api/documents/shared` | List shared documents |
+
+### Sharing
+
+| Method | Endpoint | Description |
+|---|---|---|
+| GET | `/api/documents/:documentId/shares` | List document shares |
+| POST | `/api/documents/:documentId/share` | Share a document |
+| PATCH | `/api/documents/:documentId/share/:userId` | Update sharing permission |
+| DELETE | `/api/documents/:documentId/share/:userId` | Revoke sharing access |
+
+### File Import
+
+| Method | Endpoint | Description |
+|---|---|---|
+| POST | `/api/documents/import` | Import TXT or Markdown files |
 
 ## 🧪 Testing
 
 ### Backend Tests
+
+Run the backend unit tests:
+
 ```bash
 cd backend
-npm test              # Unit tests
-npm run test:e2e     # E2E tests
-npm run test:all     # All tests
+npm test
 ```
 
-### Type Checking
+Run the end-to-end tests:
+
 ```bash
-cd backend
-npm run typecheck
-
-cd frontend
-npm run typecheck
+npm run test:e2e
 ```
 
-### Production Build
+### TypeScript Checks
+
+Run the available type-checking scripts from each application directory.
+
+### Production Builds
+
+Backend:
+
 ```bash
 cd backend
 npm run build
+```
 
+Frontend:
+
+```bash
 cd frontend
 npm run build
 ```
 
-## 📄 API Documentation
+### Verified Results
 
-### Authentication Endpoints
-- `POST /api/auth/register` - Register new user
-- `POST /api/auth/login` - User login
-- `POST /api/auth/logout` - User logout
-- `POST /api/auth/refresh` - Refresh access token
-- `GET /api/auth/me` - Get current user
+- Backend unit tests: 4/4 passed.
+- Backend sharing E2E tests: 1/1 passed.
+- Backend TypeScript checks: Passed.
+- Backend production build: Passed.
+- Frontend TypeScript checks: Passed.
+- Frontend production build: Passed.
 
-### Document Endpoints
-- `GET /api/documents` - List user's documents
-- `POST /api/documents` - Create new document
-- `GET /api/documents/:id` - Get document by ID
-- `PATCH /api/documents/:id` - Update document
-- `DELETE /api/documents/:id` - Delete document
-- `GET /api/documents/shared` - List shared documents
+## 🚀 Deployment
 
-### Sharing Endpoints
-- `GET /api/documents/:documentId/shares` - List document shares
-- `POST /api/documents/:documentId/share` - Share document
-- `PATCH /api/documents/:documentId/share/:userId` - Update share permission
-- `DELETE /api/documents/:documentId/share/:userId` - Remove share
+### Frontend – Vercel
 
-### File Import
-- `POST /api/documents/import` - Import TXT or Markdown file
+The frontend is deployed on Vercel:
 
-## 🚦 Project Status
+https://docspace-orpin.vercel.app
 
-✅ **Completed Features:**
-- User authentication (register, login, logout, refresh)
-- Document CRUD operations
-- Rich-text editor with formatting
-- Auto-save functionality
-- Document sharing with VIEWER/EDITOR permissions
-- File import (TXT, Markdown)
-- Responsive design
-- Comprehensive error handling
-- Unit and E2E tests
+### Database – Supabase
 
-⚠️ **Known Limitations:**
-- No real-time collaboration (single-user editing)
-- No document version history
-- No file export functionality
-- No image upload support
+The application uses Supabase PostgreSQL as its database provider.
 
-## 👥 Demo Scenario
+Prisma migrations were successfully applied using:
 
-1. Log in as Mohamed
-2. Create a new document and add content
-3. Use formatting tools (bold, italic, headings, lists)
-4. Import a Markdown file
-5. Share document with Ahmed as VIEWER
-6. Log out and log in as Ahmed
-7. Verify read-only access to shared document
-8. Log back in as Mohamed and upgrade Ahmed to EDITOR
-9. Log in as Ahmed again and verify editing capability
-10. Revoke Ahmed's access
+```bash
+npx prisma migrate deploy
+```
+
+### Backend – NestJS
+
+The backend is developed using NestJS and communicates with the PostgreSQL database through Prisma.
+
+For local development, follow the Quick Start instructions above. Production API availability depends on the backend deployment and its environment configuration.
+
+## ⚠️ Known Limitations & Future Improvements
+
+### Collaboration
+- No real-time simultaneous editing.
+- No live cursor presence.
+- No real-time conflict resolution.
+
+### Document Management
+- Document version history.
+- PDF and DOCX export.
+- Image uploads and embedding.
+- Document templates.
+- Folder-based organization.
+- Advanced document search.
+
+### User Experience
+- Improved mobile toolbar interactions.
+- Additional keyboard shortcuts.
+- Dark mode.
+- More descriptive validation messages.
+
+### Infrastructure
+- Rate limiting.
+- Audit logging.
+- Performance monitoring.
+- Automated database backups.
+- Offline editing support.
+
+### Current Technical Limitations
+- Complex nested Markdown lists may not preserve their complete structure during import.
+- Document changes are not synchronized between users in real time.
+- Import file-size restrictions could be improved.
+- Saving documents requires an active internet connection.
+
+## 📄 Project Documentation
+
+Additional documentation is available in the repository:
+
+- `ARCHITECTURE.md` – System architecture and technical design.
+- `AI_WORKFLOW.md` – AI-assisted development process, code review, and verification.
+- `SUBMISSION.md` – Assessment submission details.
 
 ## 📝 License
 
-Built for educational purposes as part of the AI-Native Full Stack Developer assessment.
+This project was developed for educational purposes as part of the AI-Native Full Stack Developer Assessment.
