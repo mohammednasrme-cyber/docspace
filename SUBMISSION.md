@@ -4,9 +4,9 @@
 **DocSpace** is a collaborative document editor built for the AI-Native Full Stack Developer assessment. It provides a clean, focused workspace for creating, formatting, importing, and sharing documents with clear permission controls.
 
 ## 📍 Repository URLs
-- **GitHub Repository**: `https://github.com/[username]/Full-Stack-Developer-Assignment` *(Update with actual URL)*
-- **Frontend Deployment (Vercel)**: `https://docspace-frontend.vercel.app` *(Update with actual URL)*
-- **Backend Deployment (Railway)**: `https://docspace-backend.railway.app` *(Update with actual URL)*
+- **GitHub Repository**: `https://github.com/mohammednasrme-cyber/docspace` 
+- **live deployment**: `https://docspace-orpin.vercel.app`
+
 
 ## 👤 Demo Credentials
 Two pre-seeded accounts for testing:
